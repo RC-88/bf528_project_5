@@ -17,8 +17,7 @@ Aligning RNA-Seq to the Mouse Genome Reference
 
 # Methods
 
-TopHat was utilized to align the paired-end reads of the neonatal samples to the mm9 mouse genome. TopHat is a robust aligning program that is based on the ultrafast short read mapping program of Bowtie, and it is ideal to be used in this study as it aligns the paired RNA-Seq reads with the reference annotation and identify exon-exon splice junctions. There is a total of 21,577,562 input reads obtained from the left and right read
-files. Out of the total reads, the left read had 20,878,784 (~96.8% of input) mapped, including 1,468,843 (7.0%) reads with multiple alignments. The right read had 20,510,550 (~95.1% of input) mapped, including 1,431,111 (7.0%) reads with multiple alignments. A summary of the alignment is shown in Table 1. The overall mapping rate of the reads is ~95.9% and the alignment rate of the paired-end reads is ~88.9% which indicates a good quality alignment.
+TopHat was utilized to align the paired-end reads of the neonatal samples to the mm9 mouse genome. TopHat is a robust aligning program that is based on the ultrafast short read mapping program of Bowtie, and it is ideal to be used in this study as it aligns the paired RNA-Seq reads with the reference annotation and identify exon-exon splice junctions. There is a total of 21,577,562 input reads obtained from the left and right read files. Out of the total reads, the left read had 20,878,784 (~96.8% of input) mapped, including 1,468,843 (7.0%) reads with multiple alignments. The right read had 20,510,550 (~95.1% of input) mapped, including 1,431,111 (7.0%) reads with multiple alignments. A summary of the alignment is shown in Table 1. The overall mapping rate of the reads is ~95.9% and the alignment rate of the paired-end reads is ~88.9% which indicates a good quality alignment.
 
 There are three python scripts, geneBody_coverage.py, inner_distance.py, and bam_stat.py that were used to perform different quality control metrics on the mapped reads. These scripts are parts of the RSeQC package in python3. To run the geneBody_coverage.py and inner_distance.py scripts, a sorted and indexed BAM file generated from TopHat and a reference gene model of the mouse (mm9.bed) must be provided as inputs. The geneBody_coverage.py is a script that was used to calculate the RNA-seq reads coverage over gene body and check if any 5’/3’ bias was present. The result in Figure 1 shows the RNA-Seq reads are slightly skewed towards the 3’ end of the gene body. The skewness towards increased 3' coverage could be attributed to the technical or biological processes during any of the experimental steps, such as reaction failure, or cell death, triggering mRNA degradation.
 
@@ -26,7 +25,11 @@ Inner_distance.py was used to calculate the inner distance or insert size betwee
 
 Lastly, bam_stat.py was used to calculate the mapping statistics from a BAM file including QC failed, unique mapped, splice mapped, mapped in proper pair, etc. In a total of 49,706,999 reads, 2,899,954 reads are determined to be non-uniquely mapped while 38,489,380 reads are uniquely mapped. The ratio of non-uniquely mapped reads as related to uniquely mapped reads is ~0.08% which indicates the amount of non-uniquely reads are low and the majority of reads were mapped to the reference genome.
 
+<img src="figure_1.png"></img>
+
 Figure 1: RNA-Seq Reads Coverage for the Entire Gene Body. The RNA-Seq reads are slightly skewed towards the 3’ end of the gene body. This skewness could be attributed to the technical or biological processes during any of the experimental steps, such as reaction failure, or cell death, triggering mRNA degradation.
+
+<img src="figure_2.png"></img>
 
 Figure 2: Inner distance distribution between paired reads. The distribution of the insert size is slightly skewed to the left with a mean of 85bp and standard deviation of 43bp. This skewness often indicates structure variation or aberrant splicing in the RNA-seq samples.
 
@@ -41,10 +44,16 @@ With the use of cuffdiff, we identified 2,139 genes that were differentially exp
 
 Table 2: Top 10 genes that are differentially expressed between the neonatal and adult mouse samples.
 
+<img src="table_2.png"></img>
+
+<img src="figure_4.png"></img>
+
 Figure 4: Distribution of log2 fold change of all significant genes (A) and distribution of log2 fold change for both up- and down-regulated genes (B). In Figure 4B, the left handed-side are the down-regulated genes while the right-handed side are the up-regulated genes.
 
 To identify biological pathways that associated with the cardiac generation of neonatal mice as opposed to adult mice, DAVID was used to provide annotations of the genes regarding their roles in biological processes, cellular components, and molecular functions. The top 3 functional clusters obtained from DAVID analysis are shown in Table 3. The enrichment terms for the top three clusters shown similar results as reported in the original paper (O’Meara et al., 2015, Figure 1D). For instance, the enrichment terms associated with mitochondrion (PRDX3, ACAT1, ECHS1, SLC25A11, PHYH) and sarcomere (PDLIM5, PYGM, MYOZ2, DES, CSRP3, TCAP, CRYAB) were highly expressed in the cardiac tissue of adult mice as opposed to tissue from neonatal mice. Reversely, genes that involved in cell cycle (CDC7, E2F8, CDK7, CDC26, CDC6, E2F1, CDC27, CDC45, RAD51, AURKB, CDC23) were highly expressed in neonatal mice but down-regulated in adult mice (Figure 5).
 Table 3: Gene enrichment terms associated with the up- and down- regulated genes obtained from DAVID analysis. *** indicates similar results were reported in original paper.
+
+<img src="figure_5.png"></img>
 
 Figure 5: FPKM values of representative sarcomere, mitochondrial, and cell cycle related genes that were differentially expressed in heart tissue from postnatal day 0 (P0), 4 (P4), and 7 (P7) and adult (Ad) animals.
 
