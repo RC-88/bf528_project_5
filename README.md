@@ -19,7 +19,7 @@ Aligning RNA-Seq to the Mouse Genome Reference
 
 TopHat was utilized to align the paired-end reads of the neonatal samples to the mm9 mouse genome. TopHat is a robust aligning program that is based on the ultrafast short read mapping program of Bowtie, and it is ideal to be used in this study as it aligns the paired RNA-Seq reads with the reference annotation and identify exon-exon splice junctions. There is a total of 21,577,562 input reads obtained from the left and right read files. Out of the total reads, the left read had 20,878,784 (~96.8% of input) mapped, including 1,468,843 (7.0%) reads with multiple alignments. The right read had 20,510,550 (~95.1% of input) mapped, including 1,431,111 (7.0%) reads with multiple alignments. A summary of the alignment is shown in Table 1. The overall mapping rate of the reads is ~95.9% and the alignment rate of the paired-end reads is ~88.9% which indicates a good quality alignment.
 
-Table 1: Summary of the sequencing alignment obtained from TopHat.
+<b>Table 1:</b> Summary of the sequencing alignment obtained from TopHat.
 
 <img src="table_1.png"></img>
 
@@ -31,17 +31,17 @@ Lastly, bam_stat.py was used to calculate the mapping statistics from a BAM file
 
 <img src="figure_1.png"></img>
 
-Figure 1: RNA-Seq Reads Coverage for the Entire Gene Body. The RNA-Seq reads are slightly skewed towards the 3’ end of the gene body. This skewness could be attributed to the technical or biological processes during any of the experimental steps, such as reaction failure, or cell death, triggering mRNA degradation.
+<b>Figure 1:</b> RNA-Seq Reads Coverage for the Entire Gene Body. The RNA-Seq reads are slightly skewed towards the 3’ end of the gene body. This skewness could be attributed to the technical or biological processes during any of the experimental steps, such as reaction failure, or cell death, triggering mRNA degradation.
 
 <img src="figure_2.png"></img>
 
-Figure 2: Inner distance distribution between paired reads. The distribution of the insert size is slightly skewed to the left with a mean of 85bp and standard deviation of 43bp. This skewness often indicates structure variation or aberrant splicing in the RNA-seq samples.
+<b>Figure 2:</b> Inner distance distribution between paired reads. The distribution of the insert size is slightly skewed to the left with a mean of 85bp and standard deviation of 43bp. This skewness often indicates structure variation or aberrant splicing in the RNA-seq samples.
 
 Cufflinks was used to assemble transcripts and estimates their abundances. The algorithm of Cufflinks accepts aligned RNA-seq reads and assembles the alignments into a parsimonious set of transcripts. Lastly, Cufflinks estimates the relative abundances of these transcripts and produces quantified alignments in FPKM for all genes. After removing the genes with an FPKM value of zero, the FPKM values had a range value of 0 to 2,604,770. This high variation in FPKM values indicates the quantified alignments have greater variability than it was expected. To eliminate the high variability in FPKM values, a log transformation was performed and a distribution of log FPKM values is shown in Figure 3. It seems that the distribution of log FPKM values is still slightly skewed to left even after the log transformation. This persisted skewness indicates additional normalization methods can be performed to further smooth out the distribution.
 
 <img src="figure_3.png"></img>
 
-Figure 3: Distribution of log-transformed FPKM values. The log-transformation was performed to eliminate the high variability in the FPKM values as they are ranged from 0 to 2,604,770.
+<b>Figure 3:</b> Distribution of log-transformed FPKM values. The log-transformation was performed to eliminate the high variability in the FPKM values as they are ranged from 0 to 2,604,770.
 
 In Cufflinks, there is a tool suite called cuffdiff that was used to identify differentially expressed genes between the postnatal day 0 versus adult samples. Cuffdiff tests the observed log fold change of the two samples against the null hypothesis of no change (i.e., is the true log fold change equaled to zero?). If the gene transcripts that passed the threshold of significance of p-value < 0.05 and adjusted FDR p-value < 0.01, they are considered differentially expressed. The significant genes were further subset into up and down-regulated genes and utilized by DAVID, a functional annotation clustering tool, to identify the GO category enrichment for each cluster of genes that differed between the postnatal day 0 versus adult samples.
 
@@ -49,20 +49,20 @@ In Cufflinks, there is a tool suite called cuffdiff that was used to identify di
 
 With the use of cuffdiff, we identified 2,139 genes that were differentially expressed between the two samples, cardiac tissue from postnatal day 0 versus adult mice. Table 2 shows the top 10 differentially expressed genes between the two samples, and Figure 4A shows the distribution of log2 fold change of all the significant genes. Out of the 2,139 differentially expressed genes, 1,084 are up-regulated genes while 1,055 are down-regulated genes. A histogram of the log2 fold changes for both up- and down-regulated genes is illustrated in Figure 4B. The left side of the histogram represents the down-regulated genes while the right side of the histogram shows the up-regulated genes.
 
-Table 2: Top 10 genes that are differentially expressed between the neonatal and adult mouse samples.
+<b>Table 2:</b> Top 10 genes that are differentially expressed between the neonatal and adult mouse samples.
 
 <img src="table_2.png"></img>
 
 <img src="figure_4.png"></img>
 
-Figure 4: Distribution of log2 fold change of all significant genes (A) and distribution of log2 fold change for both up- and down-regulated genes (B). In Figure 4B, the left handed-side are the down-regulated genes while the right-handed side are the up-regulated genes.
+<b>Figure 4:</b> Distribution of log2 fold change of all significant genes (A) and distribution of log2 fold change for both up- and down-regulated genes (B). In Figure 4B, the left handed-side are the down-regulated genes while the right-handed side are the up-regulated genes.
 
 To identify biological pathways that associated with the cardiac generation of neonatal mice as opposed to adult mice, DAVID was used to provide annotations of the genes regarding their roles in biological processes, cellular components, and molecular functions. The top 3 functional clusters obtained from DAVID analysis are shown in Table 3. The enrichment terms for the top three clusters shown similar results as reported in the original paper (O’Meara et al., 2015, Figure 1D). For instance, the enrichment terms associated with mitochondrion (PRDX3, ACAT1, ECHS1, SLC25A11, PHYH) and sarcomere (PDLIM5, PYGM, MYOZ2, DES, CSRP3, TCAP, CRYAB) were highly expressed in the cardiac tissue of adult mice as opposed to tissue from neonatal mice. Reversely, genes that involved in cell cycle (CDC7, E2F8, CDK7, CDC26, CDC6, E2F1, CDC27, CDC45, RAD51, AURKB, CDC23) were highly expressed in neonatal mice but down-regulated in adult mice (Figure 5).
 Table 3: Gene enrichment terms associated with the up- and down- regulated genes obtained from DAVID analysis. *** indicates similar results were reported in original paper.
 
 <img src="figure_6.png"></img>
 
-Figure 5: FPKM values of representative sarcomere, mitochondrial, and cell cycle related genes that were differentially expressed in heart tissue from postnatal day 0 (P0), 4 (P4), and 7 (P7) and adult (Ad) animals.
+<b>Figure 5:</b> FPKM values of representative sarcomere, mitochondrial, and cell cycle related genes that were differentially expressed in heart tissue from postnatal day 0 (P0), 4 (P4), and 7 (P7) and adult (Ad) animals.
 
 # Discussion
 
